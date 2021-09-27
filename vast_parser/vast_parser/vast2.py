@@ -2,7 +2,7 @@ import dexml
 from dexml import fields
 
 """
-Helper Classes for VAST 3.0
+Helper Classes for VAST 2.0
 """
 
 # Fix problem with this class. dexml can't recognize him.
@@ -29,7 +29,7 @@ class AdSystem(dexml.Model):
 
 """
 Linear Model
-VAST 3.0
+VAST 2.0
 """
 class Linear(dexml.Model):
     class meta:
@@ -43,7 +43,7 @@ class Linear(dexml.Model):
 
     """
     MediaFile Model
-    VAST 3.0
+    VAST 2.0
     """
     class MediaFile(dexml.Model):
         class meta:
@@ -73,7 +73,7 @@ class Linear(dexml.Model):
 
     """
     VideoClicks Model
-    VAST 3.0
+    VAST 2.0
     """
     class VideoClicks(dexml.Model):
         class meta:
@@ -88,7 +88,7 @@ class Linear(dexml.Model):
 
     """
     Icon Model
-    VAST 3.0
+    VAST 2.0
     """
     class Icon(dexml.Model):
         class meta:
@@ -111,7 +111,7 @@ class Linear(dexml.Model):
 
         """
         IconClicks Model
-        VAST 3.0
+        VAST 2.0
         """
         class IconClicks(dexml.Model):
             # Elements
@@ -126,7 +126,7 @@ class Linear(dexml.Model):
 
 """
 CompanionAds Model
-VAST 3.0
+VAST 2.0
 """
 class CompanionAds(dexml.Model):
     class meta:
@@ -136,7 +136,7 @@ class CompanionAds(dexml.Model):
 
     """
     Companion Model
-    VAST 3.0
+    VAST 2.0
     """
 
     class Companion(dexml.Model):
@@ -172,7 +172,7 @@ class CompanionAds(dexml.Model):
 
 """
 NonLinearAds Model
-VAST 3.0
+VAST 2.0
 """
 class NonLinearAds(dexml.Model):
     class meta:
@@ -181,7 +181,7 @@ class NonLinearAds(dexml.Model):
 
     """
     NonLinear Model
-    VAST 3.0
+    VAST 2.0
     """
     class NonLinear(dexml.Model):
         class meta:
@@ -213,7 +213,7 @@ class NonLinearAds(dexml.Model):
 
 """
 Creative Model
-VAST 3.0
+VAST 2.0
 """
 class Creative(dexml.Model):
     class meta:
@@ -228,7 +228,7 @@ class Creative(dexml.Model):
 
 """
 InLine Model
-VAST 3.0
+VAST 2.0
 """
 class InLine(dexml.Model):
     class meta:
@@ -244,7 +244,7 @@ class InLine(dexml.Model):
 
     """
     Pricing Model
-    VAST 3.0
+    VAST 2.0
     """
     class Pricing(dexml.Model):
         class meta:
@@ -257,13 +257,16 @@ class InLine(dexml.Model):
 
     pricing = fields.Model(Pricing, required=False)
 
-    impression = fields.CDATA(tagname="Impression")
+    class Impression(dexml.Model):
+        impressionUri = fields.CDATA(tagname=".")
+    
+    impressions = fields.List(Impression)
     creatives = fields.List(Creative, tagname="Creatives")
 
 
 """
 Wrapper Model
-VAST 3.0
+VAST 2.0
 """
 class Wrapper(dexml.Model):
     class meta:
@@ -278,7 +281,7 @@ class Wrapper(dexml.Model):
 
 """
 Ad Model
-VAST 3.0
+VAST 2.0
 """
 class Ad(dexml.Model):
     class meta:
@@ -292,7 +295,7 @@ class Ad(dexml.Model):
 
 """
 VAST Model
-VAST 3.0
+VAST 2.0
 """
 class VAST(dexml.Model):
     class meta:
@@ -301,4 +304,4 @@ class VAST(dexml.Model):
     version = fields.String()
     errorData = fields.CDATA(tagname="Error", required=False)
 
-    adPods = fields.List(Ad)
+    ad = fields.Model(Ad, tagname="Ad")
