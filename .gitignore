@@ -37,3 +37,12 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+
+# IDE content
+.vscode
+
+# Creatives folder
+creatives
+
+# VENV ignoring
+venv
